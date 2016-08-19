@@ -1,0 +1,1 @@
+/Comprobante[Nota contains text 'Nomina']/Numero[ fn:starts-with(. ,'200') ]
