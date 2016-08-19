@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+    targetNamespace="http://creativosdigitales.co/schema/docusfera.xsd"
+    xmlns="http://creativosdigitales.co/schema/docusfera.xsd">
+  <xs:annotation >
+    <xs:appinfo source="docusfera-version" >0.3</xs:appinfo>
+  </xs:annotation>
+    <xs:complexType name="Catalogo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="Nombre" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tercero">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="Codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="DV" type="xs:int"/>
+            <xs:element minOccurs="1" name="Nombre" type="xs:string"/>
+            <xs:element minOccurs="0" name="Telefono" type="xs:string"/>
+            <xs:element minOccurs="0" name="Direccion" type="xs:string"/>
+            <xs:element minOccurs="0" name="Ciudad" type="xs:string"/>
+            <xs:element minOccurs="0" name="Departamento" type="xs:string"/>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="url" type="xs:string"/>
+            <xs:element minOccurs="0" name="CIIU" type="Catalogo"/>
+            <xs:element minOccurs="0" name="Tipo_Entidad">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Persona Natural"/>
+                        <xs:enumeration value="Persona Jurídica"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="Regimen">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Régimen Común"/>
+                        <xs:enumeration value="Régimen Simplificado"/>
+                        <xs:enumeration value="Gran Contribuyente"/>
+                        <xs:enumeration value="Entidad sin Ánimo de Lucro"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+          <xs:element name ="Tipo_Documento" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Nomina">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Entidad_Salud" type="Catalogo"/>
+                <xs:element name="Entidad_Pension" type="Catalogo"/>
+                <xs:element name="Entidad_Cesantias" type="Catalogo"/>
+                <xs:element name="Salario_Basico" type="xs:decimal"/>
+                <xs:element name="Tiempo_Basico" type="xs:decimal"/>
+                <xs:element name="Periodo_Liquidado">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Desde" type="xs:date"/>
+                            <xs:element name="Hasta" type="xs:date"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Detalle">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Concepto" type="Catalogo"/>
+                <xs:element minOccurs="0" name="Naturaleza"/>
+                <xs:element minOccurs="0" name="Item" type="Catalogo"/>
+                <xs:element minOccurs="0" name="Nota" type="xs:string"/>
+                <xs:element minOccurs="0" name="Precio_Unitario" type="xs:decimal"/>
+                <xs:element minOccurs="0" name="Porcentaje_IVA" type="xs:decimal"/>
+                <xs:element minOccurs="0" name="Valor_IVA" type="xs:decimal"/>
+                <xs:element minOccurs="0" name="Precio_Bruto" type="xs:decimal"/>
+                <xs:element minOccurs="0" name="Valor" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Asiento">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Libro" type="xs:string"/>
+                <xs:element name="Cuenta" type="Catalogo"/>
+                <xs:element name="Concepto" type="Catalogo" minOccurs="0" />
+                <xs:element name="Tercero" type="Catalogo" minOccurs="0"/>
+                <xs:element minOccurs="0" name="Nota" type="xs:string"/>
+                <xs:element name="Debitos" type="xs:decimal" default="0"/>
+                <xs:element name="Creditos" type="xs:decimal" default="0"/>
+                <xs:element name="Cantidad" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Adjunto">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Tipo"/>
+                <xs:element minOccurs="0" name="Rol"/>
+                <xs:element name="Ubicacion"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Propiedades">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Modelo" type="xs:string"/>
+                <xs:element name="Aplicacion" type="xs:string"/>
+                <xs:element name="Estatus" type="xs:string"/>
+                <xs:element name="Impresiones" type="xs:int"/>
+                <xs:element name="Fecha_Creacion" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="Fecha_Actualizacion" type="xs:dateTime"/>
+                <xs:element name="Usuario_Creacion" type="xs:string"/>
+                <xs:element minOccurs="0" name="Usuario_Actualizacion" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Comprobante">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Propiedades"/>
+                <xs:element minOccurs="0" name="UUID" type="xs:string"/>
+                <xs:element name="Estado" type="xs:string"/>
+                <xs:element minOccurs="0" name="Sub_Estado" type="xs:string"/>
+                <xs:element name="Tipo" type="xs:string"/>
+                <xs:element minOccurs="0" name="Sub_Tipo" type="xs:string"/>
+                <xs:element name="Numero" type="xs:string"/>
+                <xs:element minOccurs="0" name="Transaccion" type="xs:string"/>
+                <xs:element name="Fecha" type="xs:date"/>
+                <xs:element minOccurs="0" name="Fecha_Vencimiento" type="xs:date"/>
+                <xs:element minOccurs="0" name="Nota" type="xs:string"/>
+                <xs:element name="Empresa" type="Tercero"/>
+                <xs:element name="Sede" type="xs:string"/>
+                <xs:element minOccurs="0" name="Centro_de_Costos" type="Catalogo"/>
+                <xs:element minOccurs="0" name="Proyecto" type="Catalogo"/>
+                <xs:element name="Tercero" type="Tercero"/>
+                <xs:element minOccurs="0" name="Responsable" type="Tercero"/>
+                <xs:element name="Totales">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Valor" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="Bruto" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="IVA" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="Retencion" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="Impoconsumo" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="ReteICA" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="Neto" type="xs:decimal"/>
+                            <xs:element minOccurs="0" name="Cantidad" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Nomina"/>
+                <xs:element minOccurs="0" name="Inventario">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="Detalle"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" name="Contabilizacion">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="Asiento"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" name="Contabilizacion_Adicional">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="Asiento"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" name="Adjuntos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="Adjunto"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
