@@ -1,0 +1,1 @@
+Esta carpeta contiene las consultas XQuery, por ahora con el modelo de variabels externas de BaseX
