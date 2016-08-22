@@ -96,7 +96,7 @@ Public Function RutaDoc(book As Workbook) As String
     Dim doc As IXMLDOMDocument2
     Set doc = GetXML(book)
 
-On Error GoTo catch
+On Error GoTo Catch
 
     Dim fecha As String
     fecha = doc.SelectSingleNode("/*/Fecha").Text
@@ -110,7 +110,7 @@ On Error GoTo catch
     base = RutaEmpresa()
     If base = "" Then
         ' Si no tiene configuración, toma la ruta del libro actual
-        base = book.Path
+        base = book.path
         
         'Determinar si es un documento Modelo
         If InStr(base, "\Modelos", vbTextCompare) > 0 Then
@@ -123,10 +123,10 @@ On Error GoTo catch
     
     Exit Function
     
-catch:
+Catch:
     ' Si no tiene xml
     ' Usar la misma carpeta donde está el documento
-    RutaDoc = book.Path
+    RutaDoc = book.path
 End Function
 
 
@@ -254,7 +254,7 @@ End Sub
 ' <param name="xpath">XPath buscado</param>
 ' <returns>Objeto Range con la referencia a la celda o null si no se encontró ninguna en la hoja</returns>
 Function BuscarXPath(ws As Worksheet, xpath As String) As Range
-    On Error GoTo catch
+    On Error GoTo Catch
 
     Dim c As Range
     
@@ -267,9 +267,28 @@ Function BuscarXPath(ws As Worksheet, xpath As String) As Range
         End If
     Next
     
-catch:
+Catch:
 
 End Function
+
+Function BuscarXPathRango(rng As Range, xpath As String) As Range
+    On Error GoTo Catch
+
+    Dim c As Range
+    
+    For Each c In rng.Cells
+        If Not c.xpath Is Nothing Then
+            If (c.xpath.Value = xpath) Then
+                Set BuscarXPathRango = c
+                Exit Function
+            End If
+        End If
+    Next
+    
+Catch:
+
+End Function
+
 
 Function MaxDir(ruta As String) As String
     Dim dirs

@@ -36,7 +36,7 @@ Dim body As String
            MsgBox "Error 0 has occured while creating a MSXML.XMLHTTPRequest object"
     End If
 
-    On Error GoTo catch
+    On Error GoTo Catch
 
     If oHttp Is Nothing Then
         MsgBox "For some reason I wasn't able to make a MSXML2.XMLHTTP object"
@@ -57,7 +57,7 @@ Dim body As String
     End Select
     Exit Sub
     
-catch:
+Catch:
     MsgBox "La base de datos no se encuentra en ejecución. Debe iniciarla primero"
     
 End Sub

@@ -2,7 +2,7 @@ module namespace cat="http://creativosdigitales.co/schema/catalogos";
 
 
 declare function cat:cuenta( $db, $codigo ){
-  let $cta := $db/Catalogo[@nombre="Cuentas"]/Entrada[Codigo=$codigo]
+  let $cta := $db/Catalogo[@nombre="Cuenta"]/Entrada[Codigo=$codigo]
   return $cta
 };
 

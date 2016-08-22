@@ -9,6 +9,11 @@ Sub doraGuardar(control As IRibbonControl)
     Call SaveDoc(ActiveWorkbook)
 End Sub
 
+Sub doraSeleccionar(control As IRibbonControl)
+    Call SeleccionarActual(ActiveWorkbook)
+End Sub
+
+
 Sub doraConfiguracion(control As IRibbonControl)
     fmConfig.Show vbModal
 End Sub

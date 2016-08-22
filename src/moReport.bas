@@ -9,7 +9,7 @@ Sub ActualizarListados(book As Workbook)
     Dim ws As Worksheet
     Dim qt As ListObject
     
-    On Error GoTo catch
+    On Error GoTo Catch
     
     For Each ws In book.Worksheets
         For Each qt In ws.ListObjects
@@ -22,7 +22,7 @@ Sub ActualizarListados(book As Workbook)
     
     Exit Sub
     
-catch:
+Catch:
     MsgBox Err.Description
     
 End Sub
